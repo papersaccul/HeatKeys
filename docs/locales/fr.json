@@ -1,0 +1,27 @@
+{
+    "title": "Carte de chaleur du clavier",
+    "input": {
+        "placeholder": "Entrez le texte à analyser...",
+        "analyze": "Analyser"
+    },
+    "layouts": {
+        "create": "Créer une disposition",
+        "modal": {
+            "title": "Créer une nouvelle disposition",
+            "name": "Nom de la disposition",
+            "row1": "Rangée numérique (optionnel, exemple: 1234567890-=)",
+            "row2": "Rangée supérieure (exemple: azertyuiop)",
+            "row3": "Rangée du milieu (exemple: qsdfghjklm)",
+            "row4": "Rangée inférieure (exemple: wxcvbn)",
+            "save": "Enregistrer",
+            "cancel": "Annuler"
+        }
+    },
+    "errors": {
+        "nameRequired": "Veuillez entrer un nom de disposition",
+        "rowsRequired": "Veuillez remplir toutes les rangées de lettres principales (2, 3 et 4)"
+    },
+    "dictionary": {
+        "select": "Dictionnaire:"
+    }
+} 
