@@ -1,0 +1,40 @@
+{
+    "title": "Keyboard Heatmap",
+    "input": {
+        "placeholder": "Enter text to analyze...",
+        "analyze": "Analyze",
+        "thermalMode": "Thermal Vision"
+    },
+    "layouts": {
+        "create": "Create Layout",
+        "modal": {
+            "title": "Create New Layout",
+            "editTitle": "Edit Layout",
+            "deleteConfirm": "Are you sure you want to delete this layout?",
+            "name": "Layout Name",
+            "row1": "Number row (optional, example: 1234567890-=)",
+            "row2": "Top letter row (example: qwertyuiop)",
+            "row3": "Home row (example: asdfghjkl)",
+            "row4": "Bottom row (example: zxcvbnm)",
+            "save": "Save",
+            "cancel": "Cancel"
+        }
+    },
+    "errors": {
+        "nameRequired": "Please enter layout name",
+        "rowsRequired": "Please fill in all main letter rows (2, 3 and 4)",
+        "cantModifyStandard": "Cannot modify standard layout name",
+        "layoutExists": "Layout with this name already exists"
+    },
+    "language": {
+        "select": "Language",
+        "en": "English",
+        "ru": "Русский",
+        "de": "Deutsch",
+        "fr": "Français",
+        "es": "Español"
+    },
+    "dictionary": {
+        "select": "Dictionary:"
+    }
+} 

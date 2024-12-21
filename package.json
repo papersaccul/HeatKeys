@@ -1,0 +1,22 @@
+{
+  "name": "heatmap",
+  "version": "1.0.0",
+  "description": "Веб-приложение для визуализации частоты использования клавиш на клавиатуре в виде тепловой карты. Поддерживает русскую и английскую раскладки.",
+  "main": "index.js",
+  "scripts": {
+    "copy-locales": "xcopy /E /I /Y locales dist\\locales",
+    "copy-layouts": "copy layouts.json dist\\layouts.json",
+    "prebuild": "if exist dist rmdir /S /Q dist",
+    "build": "npx tsc && npm run copy-locales && npm run copy-layouts",
+    "watch": "npx tsc --watch",
+    "start": "npm run build && http-server -c-1",
+    "build:gh-pages": "npm run build && xcopy /E /I /Y dist docs && copy index.html docs\\index.html && copy styles.css docs\\styles.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "typescript": "^5.0.0"
+  }
+}

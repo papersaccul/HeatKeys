@@ -1,0 +1,27 @@
+{
+    "title": "Tastatur-Heatmap",
+    "input": {
+        "placeholder": "Text zur Analyse eingeben...",
+        "analyze": "Analysieren"
+    },
+    "layouts": {
+        "create": "Layout erstellen",
+        "modal": {
+            "title": "Neues Layout erstellen",
+            "name": "Layout-Name",
+            "row1": "Zahlenreihe (optional, Beispiel: 1234567890-=)",
+            "row2": "Obere Buchstabenreihe (Beispiel: qwertzuiopü)",
+            "row3": "Mittlere Buchstabenreihe (Beispiel: asdfghjklöä)",
+            "row4": "Untere Buchstabenreihe (Beispiel: yxcvbnm)",
+            "save": "Speichern",
+            "cancel": "Abbrechen"
+        }
+    },
+    "errors": {
+        "nameRequired": "Bitte geben Sie einen Layout-Namen ein",
+        "rowsRequired": "Bitte füllen Sie alle Hauptbuchstabenreihen aus (2, 3 und 4)"
+    },
+    "dictionary": {
+        "select": "Wörterbuch:"
+    }
+} 

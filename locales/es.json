@@ -1,0 +1,27 @@
+{
+    "title": "Mapa de calor del teclado",
+    "input": {
+        "placeholder": "Ingrese texto para analizar...",
+        "analyze": "Analizar"
+    },
+    "layouts": {
+        "create": "Crear diseño",
+        "modal": {
+            "title": "Crear nuevo diseño",
+            "name": "Nombre del diseño",
+            "row1": "Fila numérica (opcional, ejemplo: 1234567890-=)",
+            "row2": "Fila superior (ejemplo: qwertyuiop)",
+            "row3": "Fila central (ejemplo: asdfghjklñ)",
+            "row4": "Fila inferior (ejemplo: zxcvbnm)",
+            "save": "Guardar",
+            "cancel": "Cancelar"
+        }
+    },
+    "errors": {
+        "nameRequired": "Por favor, introduzca el nombre del diseño",
+        "rowsRequired": "Por favor, rellene todas las filas de letras principales (2, 3 y 4)"
+    },
+    "dictionary": {
+        "select": "Diccionario:"
+    }
+} 
