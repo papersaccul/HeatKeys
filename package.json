@@ -4,13 +4,14 @@
   "description": "Веб-приложение для визуализации частоты использования клавиш на клавиатуре в виде тепловой карты. Поддерживает русскую и английскую раскладки.",
   "main": "index.js",
   "scripts": {
-    "copy-locales": "xcopy /E /I /Y locales docs\\locales",
-    "copy-layouts": "copy layouts.json docs\\layouts.json",
+    "copy-locales": "xcopy /E /I /Y src\\utils\\locales\\*.json docs\\locales\\",
+    "copy-layouts": "xcopy /E /I /Y src\\config\\*.json docs\\config\\",
+    "copy-static": "copy public\\index.html docs\\ && copy src\\styles\\styles.css docs\\ && type nul > docs\\.nojekyll && type nul > .nojekyll",
     "prebuild": "if exist docs rmdir /S /Q docs",
-    "build": "tsc && npm run copy-locales && npm run copy-layouts",
+    "build": "tsc && npm run copy-locales && npm run copy-layouts && npm run copy-static",
     "watch": "tsc --watch",
     "start": "npm run build && http-server -c-1",
-    "build:gh-pages": "npm run build && copy index.html docs\\index.html && copy styles.css docs\\styles.css && copy dictionaries.json docs\\dictionaries.json && copy layouts.json docs\\layouts.json && type nul > docs\\.nojekyll && type nul > .nojekyll"
+    "build:gh-pages": "npm run build"
   },
   "keywords": [],
   "author": "",
