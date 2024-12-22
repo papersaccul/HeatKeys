@@ -1,5 +1,5 @@
-import { i18n } from '../utils/i18n.js';
-import { ThemeManager } from '../utils/theme.js';
+import { i18n } from './i18n.js';
+import { ThemeManager } from './theme.js';
 class KeyboardHeatmap {
     constructor() {
         this.currentLayout = 'ru';
@@ -65,7 +65,7 @@ class KeyboardHeatmap {
     }
     async loadLayoutsFromConfig() {
         try {
-            const response = await fetch('../config/layouts.json');
+            const response = await fetch('layouts.json');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -367,7 +367,7 @@ class KeyboardHeatmap {
     }
     async loadDictionaries() {
         try {
-            const response = await fetch('../config/dictionaries.json');
+            const response = await fetch('dictionaries.json');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }

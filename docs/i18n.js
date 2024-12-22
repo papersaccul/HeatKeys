@@ -24,7 +24,7 @@ export class I18n {
         }
         this.loadingPromises[lang] = new Promise(async (resolve, reject) => {
             try {
-                const response = await fetch(`./locales/${lang}.json`);
+                const response = await fetch(`dist/locales/${lang}.json`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
