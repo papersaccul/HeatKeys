@@ -1,5 +1,6 @@
-import { i18n } from './i18n.js';
+import { i18n } from './i18n/i18n.js';
 import { ThemeManager } from './theme.js';
+import { Language } from './i18n/types.js';
 
 interface KeyboardLayout {
     [key: string]: string[][];
@@ -83,6 +84,9 @@ class KeyboardHeatmap {
                 this.initializeDictionarySelector();
                 this.loadSelectedDictionary();
             });
+        }).catch(error => {
+            console.error('Failed to initialize keyboard:', error);
+            alert(i18n.translate('errors.loadingConfiguration'));
         });
         
         this.initHeatmap();
@@ -90,7 +94,7 @@ class KeyboardHeatmap {
 
     private initializeLanguageSelector(): void {
         const languages = i18n.getLanguages();
-        languages.forEach(lang => {
+        languages.forEach((lang: Language) => {
             const option = document.createElement('option');
             option.value = lang.code;
             option.textContent = lang.nativeName;
@@ -130,27 +134,10 @@ class KeyboardHeatmap {
                 });
             }
 
-            if (Object.keys(this.layouts).length === 0) {
-                this.layouts['ru'] = [
-                    ['ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '='],
-                    ['й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ'],
-                    ['ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э'],
-                    ['я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.']
-                ];
-                this.layoutNames['ru'] = 'Русская';
-            }
-
             this.availableLayouts = Object.keys(this.layouts);
         } catch (error) {
-            console.error('Ошибка загрузки конфигурации раскладок:', error);
-            this.layouts['ru'] = [
-                ['ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '='],
-                ['й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ'],
-                ['ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э'],
-                ['я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.']
-            ];
-            this.layoutNames['ru'] = 'Русская';
-            this.availableLayouts = ['ru'];
+            console.error('Error loading layout configuration:', error);
+            throw error; 
         }
     }
 

@@ -1,12 +1,14 @@
-import { languages } from './locales/config.js';
+import { loadLanguages, loadTranslation } from './loader.js';
 export class I18n {
     constructor() {
         this.currentLanguage = 'en';
         this.translations = {};
         this.observers = [];
         this.loadingPromises = {};
+        this.languages = [];
         const savedLang = localStorage.getItem('language') || 'en';
         Promise.all([
+            this.init(),
             this.loadLanguage(savedLang),
             savedLang !== 'en' ? this.loadLanguage('en') : Promise.resolve()
         ]).then(() => {
@@ -14,6 +16,9 @@ export class I18n {
                 this.setLanguage(savedLang).catch(console.error);
             }
         });
+    }
+    async init() {
+        this.languages = await loadLanguages();
     }
     async loadLanguage(lang) {
         if (this.translations[lang]) {
@@ -24,11 +29,7 @@ export class I18n {
         }
         this.loadingPromises[lang] = new Promise(async (resolve, reject) => {
             try {
-                const response = await fetch(`dist/locales/${lang}.json`);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                this.translations[lang] = await response.json();
+                this.translations[lang] = await loadTranslation(lang);
                 resolve();
             }
             catch (error) {
@@ -43,7 +44,7 @@ export class I18n {
         return this.loadingPromises[lang];
     }
     async setLanguage(lang) {
-        if (!languages.find(l => l.code === lang)) {
+        if (!this.languages.find((l) => l.code === lang)) {
             throw new Error(`Language ${lang} is not supported`);
         }
         try {
@@ -96,7 +97,7 @@ export class I18n {
         });
     }
     getLanguages() {
-        return languages;
+        return this.languages;
     }
     getCurrentLanguage() {
         return this.currentLanguage;

@@ -1,18 +1,17 @@
-import { Language, languages } from './locales/config.js';
-
-interface Translations {
-    [key: string]: any;
-}
+import { Language, Translations } from './types.js';
+import { loadLanguages, loadTranslation } from './loader.js';
 
 export class I18n {
     private currentLanguage: string = 'en';
     private translations: { [lang: string]: Translations } = {};
     private observers: ((lang: string) => void)[] = [];
     private loadingPromises: { [lang: string]: Promise<void> } = {};
+    private languages: Language[] = [];
 
     constructor() {
         const savedLang = localStorage.getItem('language') || 'en';
         Promise.all([
+            this.init(),
             this.loadLanguage(savedLang),
             savedLang !== 'en' ? this.loadLanguage('en') : Promise.resolve()
         ]).then(() => {
@@ -20,6 +19,10 @@ export class I18n {
                 this.setLanguage(savedLang).catch(console.error);
             }
         });
+    }
+
+    private async init(): Promise<void> {
+        this.languages = await loadLanguages();
     }
 
     async loadLanguage(lang: string): Promise<void> {
@@ -32,15 +35,10 @@ export class I18n {
 
         this.loadingPromises[lang] = new Promise(async (resolve, reject) => {
             try {
-                const response = await fetch(`dist/locales/${lang}.json`);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                this.translations[lang] = await response.json();
+                this.translations[lang] = await loadTranslation(lang);
                 resolve();
             } catch (error) {
                 console.error(`Failed to load language ${lang}:`, error);
-
                 delete this.translations[lang];
                 reject(error);
             } finally {
@@ -52,7 +50,7 @@ export class I18n {
     }
 
     async setLanguage(lang: string): Promise<void> {
-        if (!languages.find(l => l.code === lang)) {
+        if (!this.languages.find((l: Language) => l.code === lang)) {
             throw new Error(`Language ${lang} is not supported`);
         }
 
@@ -113,7 +111,7 @@ export class I18n {
     }
 
     getLanguages(): Language[] {
-        return languages;
+        return this.languages;
     }
 
     getCurrentLanguage(): string {
