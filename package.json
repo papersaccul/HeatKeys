@@ -1,7 +1,7 @@
 {
   "name": "heatkeys",
   "version": "1.0.0",
-  "description": "Web application for visualizing the frequency of key usage on the keyboard as a heat map. Supports Russian and English layouts.",
+  "description": "Web-Tool for displaying a heatmap of keyboard layout based on a dictionary",
   "main": "index.js",
   "scripts": {
     "copy-locales": "xcopy /E /I /Y src\\locales docs\\locales",
@@ -14,7 +14,7 @@
     "build:gh-pages": "npm run build && type nul > docs\\.nojekyll && type nul > .nojekyll"
   },
   "keywords": [],
-  "author": "",
+  "author": "paper_sacculos",
   "license": "MIT",
   "devDependencies": {
     "http-server": "^14.1.1",

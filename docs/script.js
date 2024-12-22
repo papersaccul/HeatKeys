@@ -121,21 +121,25 @@ class KeyboardHeatmap {
         return this.layoutNames[layout] || layout;
     }
     initializeEventListeners() {
-        const analyzeBtn = document.getElementById('analyze-btn');
         const createLayoutBtn = document.getElementById('create-layout');
         const saveLayoutBtn = document.getElementById('save-layout');
         const cancelLayoutBtn = document.getElementById('cancel-layout');
         const inputText = document.getElementById('input-text');
         const thermalCheckbox = document.getElementById('thermal-mode');
         const editLayoutBtn = document.getElementById('edit-layout-btn');
-        analyzeBtn?.addEventListener('click', () => this.analyzeText(inputText.value));
+        const closeModalBtn = document.querySelector('.close-modal-btn');
+        inputText.addEventListener('input', () => this.analyzeText(inputText.value));
         this.layoutSelect.addEventListener('change', () => this.switchLayout());
         createLayoutBtn?.addEventListener('click', () => this.showLayoutModal());
         saveLayoutBtn?.addEventListener('click', () => this.saveNewLayout());
         cancelLayoutBtn?.addEventListener('click', () => this.hideLayoutModal());
+        closeModalBtn?.addEventListener('click', () => this.hideLayoutModal());
         thermalCheckbox?.addEventListener('change', (e) => {
             this.thermalMode = e.target.checked;
             localStorage.setItem('thermal-mode', this.thermalMode.toString());
+            if (this.heatmapCanvas) {
+                this.heatmapCanvas.style.display = this.thermalMode ? 'block' : 'none';
+            }
             this.updateHeatmap();
         });
         editLayoutBtn?.addEventListener('click', () => this.editCurrentLayout());
